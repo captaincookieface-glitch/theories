@@ -2,67 +2,169 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Theory SHA-256 Checker</title>
+<title>Universal Stability Pattern</title>
+<meta name="description" content="Universal Stability Pattern Across Cultures. Complete text and metadata from DB.">
 <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
 <style>
-body { font-family: sans-serif; padding: 20px; }
-textarea { width: 100%; height: 300px; }
-#status { font-weight: bold; margin-top: 20px; }
+body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.5; }
+#unlockSection { margin-top: 20px; }
+#result { margin-top: 10px; font-weight: bold; }
 </style>
 </head>
 <body>
 
-<h1>Theory Proof-of-Work Checker</h1>
+<h1>Universal Stability Pattern</h1>
 
-<!-- הצג את כל הערכים מה-DB -->
-<pre id="theoryJSON">
-{
+<div id="content"></div>
+
+<div id="unlockSection">
+<label for="hashInput">Enter SHA-256 Hash to Unlock:</label><br>
+<input type="text" id="hashInput" size="80">
+<button id="checkHash">Check</button>
+<div id="result"></div>
+</div>
+
+<script>
+const theory = {
   "id": "2512264115201",
   "safecreative_url": "https://www.safecreative.org/work/2512264115201-universal-stability-pattern",
   "twitter_url": "",
   "date": "12/26/2025",
   "title": "Universal Stability Pattern",
-  "text": "Universal Stability Pattern Across Cultures\nI believe there is a shared pattern across many different cultures in the world.\nEven though the words are different, the idea is always the same:\n\nDifferent forces must move in the same direction for stability to exist.\n\nBelow are cultural examples that all describe this same principle in their own language.\n...\nFinal Universal Rule\n\nEvery culture uses different words, but all of them describe the same universal stability rule: two different forces must pull in the same direction — that’s what creates a strong family, a stable group, or a healthy society.",
+  "text": `Universal Stability Pattern Across Cultures
+I believe there is a shared pattern across many different cultures in the world.
+Even though the words are different, the idea is always the same:
+
+Different forces must move in the same direction for stability to exist.
+
+Below are cultural examples that all describe this same principle in their own language.
+
+Chinese — Yin–Yang
+Two different, complementary forces that create stability when kept in the right proportion.
+
+Arab — Mutual Respect (Muḥāfaẓat ʿalā al-Karāma)
+In traditional Arab culture, if the two partners act without damaging each other's dignity — the home stays stable.
+
+Jewish — Shalom Bayit (Peace in the Home)
+Two different people, different roles, one shared direction keeping the household stable.
+
+Christian — Harmony / Unity
+Different forces moving toward one shared purpose.
+
+American — Happy wife, happy life
+When the main forces at home are aligned → life moves with less resistance.
+
+Ancient Slavs — Domovoi
+A household spirit symbolizing internal balance.
+The home stays stable when everyone pulls in the same direction.
+
+Japan — Wa (和)
+Harmony created when different people move in a unified direction.
+
+Korea — Hwamok (화목)
+Family harmony — different roles cooperating toward one stable direction.
+
+India — Dharma of the Household (Grihastha Dharma)
+Each person has a different role, but all roles must move toward the same purpose.
+
+Native American — The Sacred Circle
+Different spirits and roles moving together to keep the tribe strong.
+
+East Africa — Ubuntu
+I am because we are.
+Differences align toward a shared community path.
+
+Ancient Greece — Oikonomia
+A household becomes stable when different members coordinate toward one purpose.
+
+Ancient Rome — Concordia
+The goddess of harmony — stability comes from aligned forces.
+
+Vikings / Nordic — Frith
+Stability created when household members cooperate for survival.
+
+Morocco / Maghreb — Salaam ed-Dar (سلام الدار)
+Peace of the home: different wills aligning to create stability.
+
+Persia / Iran — Khāneh dar Āshti (آشتی در خانه)
+Reconciliation and unity in the home — different forces joining one direction.
+
+Tibet — Tendrel (རྟེན་འབྲེལ)
+Interdependent forces creating stability only when aligned.
+
+Maya Civilization — Dual Balance
+Male and female forces working together toward one purpose.
+
+Ancient Egypt — Ma'at
+Balance achieved when different energies move in coordinated alignment.
+
+Mesopotamia — Shulmu
+Wholeness created when opposing forces align — origin of Shalom and Salam.
+
+Celtic / Irish — Awen
+The flow of spirit created when different energies join one direction.
+
+Tolstoy Connection
+When the people in a family move in the same direction, the structure becomes stable — so happy families look similar.
+
+Unified Direction Theory (Simple Structural Explanation)
+
+When several people operate together inside one system — a family, a team, a group, or a community — each person has their own direction of movement: what they want, how they think, and where they are trying to go.
+
+But when all the people move toward the same direction, even if each one plays a different role, their forces add up.
+
+In this state:
+less effort is needed to move forward
+fewer collisions
+smoother progress
+a stable system emerges
+
+It works exactly like pushing a heavy object:
+if everyone pushes at the same angle → it moves straight
+if everyone pushes in different angles → almost nothing moves
+
+This is the meaning of a stable vector: a single clear direction that creates unified and stable movement.
+
+The clearer the shared goal is — and the better people understand how they fit together — the less force the system needs to remain stable.
+
+This is not psychology and not emotion.
+It is simply structure:
+
+Aligned forces → stability
+Conflicting forces → chaos
+
+Final Universal Rule
+
+Every culture uses different words, but all of them describe the same universal stability rule: two different forces must pull in the same direction — that’s what creates a strong family, a stable group, or a healthy society.`,
   "nft_url": "https://og.rarible.com/token/polygon/0x35f8aee672cde8e5fd09c93d2bfe4ff5a9cf0756:54563394983082294023723203677514925242911692977273068555123379805042499387393"
+};
+
+// הצגת כל השדות
+const contentDiv = document.getElementById('content');
+for (let key of ["id","safecreative_url","twitter_url","date","title","text","nft_url"]) {
+  let p = document.createElement('p');
+  p.textContent = `${key}: ${theory[key]}`;
+  contentDiv.appendChild(p);
 }
-</pre>
 
-<h3>Enter SHA-256 Hash to Unlock:</h3>
-<input type="text" id="userInput" placeholder="Enter hash here" style="width: 100%;">
-<button id="checkBtn">Check</button>
+// חישוב hash מהערכים בלבד
+const values = ["id","safecreative_url","twitter_url","date","title","text","nft_url"].map(k => theory[k]).join('');
+const correctHash = CryptoJS.SHA256(values).toString(CryptoJS.enc.Hex);
 
-<p id="status"></p>
+// בדיקה
+document.getElementById('checkHash').addEventListener('click', () => {
+  const inputHash = document.getElementById('hashInput').value.trim();
+  const resultDiv = document.getElementById('result');
+  if(inputHash === correctHash) {
+    resultDiv.style.color = 'green';
+    resultDiv.textContent = '✅ Hash correct. Content unlocked.';
+  } else {
+    resultDiv.style.color = 'red';
+    resultDiv.textContent = '❌ Hash incorrect, try again.';
+  }
+});
 
-<script>
-(function() {
-    const CryptoJS = window.CryptoJS;
-    
-    // קח את כל הערכים של האובייקט JSON
-    const obj = JSON.parse(document.getElementById('theoryJSON').innerText);
-    
-    // חבר את כל הערכים לסטרינג אחד, בסדר זהה ל-DB
-    const combinedValues = obj.id +
-                           obj.safecreative_url +
-                           obj.twitter_url +
-                           obj.date +
-                           obj.title +
-                           obj.text +
-                           obj.nft_url;
-
-    // חשב SHA-256
-    const correctHash = CryptoJS.SHA256(combinedValues).toString(CryptoJS.enc.Hex);
-
-    // בדיקה עם input
-    document.getElementById('checkBtn').addEventListener('click', () => {
-        const userHash = document.getElementById('userInput').value.trim();
-        const status = document.getElementById('status');
-        if(userHash === correctHash) {
-            status.innerText = "✅ Hash נכון! הדף שוחרר.";
-        } else {
-            status.innerText = "❌ Hash שגוי, נסה שוב.";
-        }
-    });
-})();
+console.log("SHA-256 Hash:", correctHash);
 </script>
 
 </body>
