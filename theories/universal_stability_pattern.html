@@ -120,12 +120,17 @@ Every culture uses different words, but all of them describe the same universal 
 <p id="hash"></p>
 
 <script>
-// Compute SHA-256 hash of the text content
-window.addEventListener('DOMContentLoaded', () => {
-    const CryptoJS = window.CryptoJS;
-    const textToHash = document.querySelector('body').innerText;
-    const hash = CryptoJS.SHA256(textToHash).toString(CryptoJS.enc.Hex);
-    document.getElementById('hash').innerText = "SHA-256 Hash: " + hash;
+
+    function waitForBody(cb) {
+    if (document.body && document.body.innerText.trim().length > 0) {
+        cb(document.body.innerText);
+    } else {
+        setTimeout(() => waitForBody(cb), 100);
+    }
+}
+
+waitForBody(text => {
+    completion(text);
 });
 </script>
 </body>
