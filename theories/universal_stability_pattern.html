@@ -2,33 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Universal Stability Pattern</title>
-<meta name="description" content="Universal Stability Pattern Across Cultures. Complete text and metadata from DB.">
+<title>Theory Proof-of-Work Checker</title>
 <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
 <style>
-body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.5; }
-#unlockSection { margin-top: 20px; }
+body { font-family: sans-serif; margin: 20px; }
+textarea { width: 100%; height: 150px; }
+input { width: 400px; padding: 5px; }
+button { padding: 5px 10px; }
 #result { margin-top: 10px; font-weight: bold; }
 </style>
 </head>
 <body>
 
-<h1>Universal Stability Pattern</h1>
+<h1>Theory Proof-of-Work Checker</h1>
 
-<div id="content"></div>
+<pre id="display"></pre>
 
-<div id="unlockSection">
 <label for="hashInput">Enter SHA-256 Hash to Unlock:</label><br>
-<input type="text" id="hashInput" size="80">
-<button id="checkHash">Check</button>
+<input type="text" id="hashInput" placeholder="paste hash here">
+<button onclick="checkHash()">Check</button>
+
 <div id="result"></div>
-</div>
 
 <script>
+// האובייקט של התיאוריה (דוגמה ראשונה מה-DB)
 const theory = {
   "id": "2512264115201",
   "safecreative_url": "https://www.safecreative.org/work/2512264115201-universal-stability-pattern",
-  "twitter_url": "",
   "date": "12/26/2025",
   "title": "Universal Stability Pattern",
   "text": `Universal Stability Pattern Across Cultures
@@ -136,36 +136,37 @@ Conflicting forces → chaos
 Final Universal Rule
 
 Every culture uses different words, but all of them describe the same universal stability rule: two different forces must pull in the same direction — that’s what creates a strong family, a stable group, or a healthy society.`,
+  "twitter_url": "",
   "nft_url": "https://og.rarible.com/token/polygon/0x35f8aee672cde8e5fd09c93d2bfe4ff5a9cf0756:54563394983082294023723203677514925242911692977273068555123379805042499387393"
 };
 
-// הצגת כל השדות
-const contentDiv = document.getElementById('content');
-for (let key of ["id","safecreative_url","twitter_url","date","title","text","nft_url"]) {
-  let p = document.createElement('p');
-  p.textContent = `${key}: ${theory[key]}`;
-  contentDiv.appendChild(p);
-}
+// הצגת כל התיאוריה
+document.getElementById('display').innerText = JSON.stringify(theory, null, 2);
 
-// חישוב hash מהערכים בלבד
-const values = ["id","safecreative_url","twitter_url","date","title","text","nft_url"].map(k => theory[k]).join('');
-const correctHash = CryptoJS.SHA256(values).toString(CryptoJS.enc.Hex);
-
-// בדיקה
-document.getElementById('checkHash').addEventListener('click', () => {
-  const inputHash = document.getElementById('hashInput').value.trim();
-  const resultDiv = document.getElementById('result');
-  if(inputHash === correctHash) {
-    resultDiv.style.color = 'green';
-    resultDiv.textContent = '✅ Hash correct. Content unlocked.';
-  } else {
-    resultDiv.style.color = 'red';
-    resultDiv.textContent = '❌ Hash incorrect, try again.';
-  }
+// חישוב hash לפי סדר ממויין של השדות
+const sortedKeys = Object.keys(theory).sort(); // sort alphabetically
+let combinedValues = "";
+sortedKeys.forEach(k => {
+  combinedValues += theory[k];
 });
 
-console.log("SHA-256 Hash:", correctHash);
+// חישוב SHA-256
+const hash = CryptoJS.SHA256(combinedValues).toString(CryptoJS.enc.Hex);
+
+// פונקציה לבדיקה
+function checkHash() {
+  const input = document.getElementById('hashInput').value.trim();
+  const result = document.getElementById('result');
+  if(input === hash) {
+    result.innerText = "✅ Hash נכון! הדף שוחרר.";
+    result.style.color = "green";
+  } else {
+    result.innerText = "❌ Hash לא נכון, נסה שוב.";
+    result.style.color = "red";
+  }
+}
 </script>
 
 </body>
 </html>
+  
