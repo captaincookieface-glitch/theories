@@ -40,17 +40,6 @@
       font-size: 0.9em;
     }
 
-    .avatar {
-  vertical-align: middle;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
-    header {
-      padding: 60px 20px 40px;
-    }
-
 header > ul {
 	display: flex;
 	flex-direction: row;
@@ -62,6 +51,7 @@ header > ul > li, header > ul > li > a{
 	display: flex;
 	flex-direction: column;
 	text-align:center;
+	vertical-align:middle;
 }   
 
     header img {
@@ -78,8 +68,8 @@ header > ul > li, header > ul > li > a{
 
 <main itemscope itemtype="https://schema.org/Collection">
 
-
-<header>
+  <h1 itemprop="name">Captain Cookie Face Universe Theories</h1>
+<nav>
    <ul>
 
     <li>
@@ -97,10 +87,7 @@ header > ul > li, header > ul > li > a{
     </li> 
     
   </ul>
-</header>
-
-  <h1 itemprop="name">Captain Cookie Face Universe Theories</h1>
-
+</nav>
   <p itemprop="description">
     This index lists all published theories in the Captain Cookie Face Universe.
     Each theory is an independent canonical document with a deterministic SHA-256 hash.
