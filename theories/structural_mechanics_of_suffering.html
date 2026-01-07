@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>The Structural Mechanics of Suffering</title>
-
   <style>
     body {
       font-family:
@@ -23,7 +22,7 @@
     }
     .key {
       color: #000;
-      font-size: 2em;
+      font-size: 2em !important;
       text-transform: capitalize;
       font-weight: bold;
     }
@@ -38,9 +37,18 @@
     pre {
       white-space: pre-wrap;
     }
+    button {
+      font-family: inherit;
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #eee;
+    }
   </style>
 </head>
-
 <body>
 
 <article itemscope itemtype="https://schema.org/CreativeWork">
@@ -54,7 +62,10 @@
 
   <div class="block">
     <div class="key">SHA-256</div>
-    <div class="hash" id="hashResult"></div>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <div class="hash" id="hashResult"></div>
+      <button id="copyHashBtn" type="button">Copy</button>
+    </div>
   </div>
 
 </article>
@@ -243,6 +254,11 @@ you're part of the problem this theory describes.
 
     container.appendChild(div);
   }
+
+  document.getElementById('copyHashBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText(hashHex);
+    alert('Hash copied');
+  });
 
 })();
 </script>
