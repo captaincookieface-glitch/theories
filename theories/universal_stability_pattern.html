@@ -38,6 +38,18 @@
     pre {
       white-space: pre-wrap;
     }
+
+    button {
+  font-family: inherit;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #eee;
+}
   </style>
 </head>
 <body>
@@ -53,7 +65,11 @@
 
 <div class="block">
   <div class="key">SHA-256</div>
-  <div class="hash" id="hashResult"></div>
+
+  <div style="display:flex; gap:10px; align-items:center;">
+    <div class="hash" id="hashResult"></div>
+    <button id="copyHashBtn" type="button">Copy</button>
+  </div>
 </div>
 
 <script>
@@ -221,6 +237,15 @@ Every culture uses different words, but all of them describe the same universal 
 
     container.appendChild(div);
   }
+
+
+  // ===== COPY HASH BUTTON =====
+document.getElementById('copyHashBtn').addEventListener('click', () => {
+  const hashText = document.getElementById('hashResult').textContent;
+  navigator.clipboard.writeText(hashText).then(() => {
+    alert('Hash copied');
+  });
+});
 
 })();
 </script>
