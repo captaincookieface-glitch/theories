@@ -14,37 +14,20 @@ steps:
 - uses: actions/checkout@v4
 
 ```
-  - name: Generate sitemap.xml
+  - name: Generate sitemap
     run: |
-      cat > sitemap.xml << 'HEADER'
-      <?xml version="1.0" encoding="UTF-8"?>
-      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        <url>
-          <loc>https://www.captaincookieface.com/</loc>
-        </url>
-        <url>
-          <loc>https://www.captaincookieface.com/theories/</loc>
-        </url>
-      HEADER
-      
-      for file in theories/*.html; do
-        filename=$(basename "$file")
-        if [ "$filename" != "index.html" ]; then
-          echo "  <url>" >> sitemap.xml
-          echo "    <loc>https://www.captaincookieface.com/theories/$filename</loc>" >> sitemap.xml
-          echo "  </url>" >> sitemap.xml
-        fi
-      done
-      
-      echo "</urlset>" >> sitemap.xml
-      
-      cat sitemap.xml
+      echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+      echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
+      echo '<url><loc>https://www.captaincookieface.com/</loc></url>' >> sitemap.xml
+      echo '<url><loc>https://www.captaincookieface.com/theories/</loc></url>' >> sitemap.xml
+      for f in theories/*.html; do echo "<url><loc>https://www.captaincookieface.com/$f</loc></url>" >> sitemap.xml; done
+      echo '</urlset>' >> sitemap.xml
 
-  - name: Commit sitemap
+  - name: Commit
     run: |
-      git config --local user.email "action@github.com"
-      git config --local user.name "GitHub Action"
+      git config user.email "action@github.com"
+      git config user.name "GitHub Action"
       git add sitemap.xml
-      git diff --staged --quiet || git commit -m "Update sitemap.xml"
+      git diff --staged --quiet || git commit -m "Update sitemap"
       git push
 ```
